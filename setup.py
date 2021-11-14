@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-
+with open("README.md", "r",encoding="UTF-8") as fh:
+    long_description = fh.read()
 def install():
     required = []
     with open('requirements.txt') as f:
@@ -9,12 +10,12 @@ def install():
         for req in requirements:
             p = req.split('==')
             required.append(p[0])
-    desc = ''
     setup(
         name='py-aiohanspell',
-        version='1.0',
-        description=desc,
-        long_description=desc,
+        version='1.1',
+        description="비동기 한글 맞춤법검사 모듈입니다.",
+        long_description=long_description,
+        long_description_content_type="text/markdown",
         author='SpaceDEV',
         author_email='support@spacedev.space',
         url='https://github.com/spacedev-official/py-aiohanspell',
@@ -33,6 +34,7 @@ def install():
         ],
         packages=find_packages(),
         install_requires=required,
+        python_requires='>=3.7'
     )
 
 

@@ -120,6 +120,7 @@ from hanspell.constants import CheckResult
 ## 변경내역
 
 - **버전 1.0**: 첫 버전 릴리즈
+- **버전 1.1**: pypi 프로젝트 내부 README추가
 
 
 ## 라이선스(License)
