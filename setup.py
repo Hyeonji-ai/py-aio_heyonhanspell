@@ -11,13 +11,13 @@ def install():
             required.append(p[0])
     desc = ''
     setup(
-        name='py-hanspell',
-        version='1.1',
+        name='py-aiohanspell',
+        version='1.0',
         description=desc,
         long_description=desc,
-        author='SuHun Han',
-        author_email='ssut@ssut.me',
-        url='https://github.com/ssut/py-hanspell',
+        author='SpaceDEV',
+        author_email='support@spacedev.space',
+        url='https://github.com/spacedev-official/py-aiohanspell',
         classifiers=[
             'Development Status :: 5 - Production/Stable',
             'Intended Audience :: Education',
@@ -28,11 +28,8 @@ def install():
             'Operating System :: MacOS :: MacOS X',
             'Topic :: Education',
             'Programming Language :: Python',
-            'Programming Language :: Python :: 2.6',
-            'Programming Language :: Python :: 2.7',
-            'Programming Language :: Python :: 3.2',
-            'Programming Language :: Python :: 3.3',
-            'Programming Language :: Python :: 3.4'
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8'
         ],
         packages=find_packages(),
         install_requires=required,

@@ -1,11 +1,10 @@
-# py-hanspell
+# py-aiohanspell
 
-[![Build Status](https://travis-ci.org/ssut/py-hanspell.svg?branch=master)](https://travis-ci.org/ssut/py-hanspell)
-[![PyPI version](https://badge.fury.io/py/py-hanspell.svg)](http://badge.fury.io/py/py-hanspell)
+py-aiohanspell은 네이버 맞춤법 검사기를 이용한 파이썬용 한글 맞춤법 검사 라이브러리입니다.
 
-py-hanspell은 네이버 맞춤법 검사기를 이용한 파이썬용 한글 맞춤법 검사 라이브러리입니다.
+파이썬 3.7이상 모두 호환됩니다.
 
-파이썬 2.7 및 3.4 모두 호환됩니다.
+또한 이 모듈은 [ssut/py-hanspell](https://github.com/ssut/py-hanspell) 을 포크하여 제작된 모듈입니다
 
 ---
 
@@ -17,7 +16,7 @@ py-hanspell은 네이버 맞춤법 검사기를 이용한 파이썬용 한글 �
 커맨드 라인에 다음 명령어를 입력하시면 자동으로 설치가 진행됩니다
 
 ```bash
-$ pip install py-hanspell
+$ pip install py-aiohanspell
 ```
 
 다음으로 이 GitHub 저장소에서 직접 내려받아 설치하는 방법입니다. 이 저장소를 로컬에 clone 하거나 우측에 보이는 메뉴에서 zip 파일로 다운받은 후에 로컬 커맨드 라인에
@@ -30,13 +29,13 @@ $ python setup.py install
 
 ### 필요한 라이브러리
 
-- requests
+- aiohttp
 
 ## 사용 방법
 
 ```python
->>> from hanspell import spell_checker
->>> result = spell_checker.check(u'안녕 하세요. 저는 한국인 입니다. 이문장은 한글로 작성됬습니다.')
+>>> from aiohanspell import spell_checker
+>>> result = await spell_checker.check(u'안녕 하세요. 저는 한국인 입니다. 이문장은 한글로 작성됬습니다.')
 >>> result.as_dict()  # dict로 출력
 {'checked': '안녕하세요. 저는 한국인입니다. 이 문장은 한글로 작성됐습니다.',
  'errors': 4,
@@ -58,7 +57,7 @@ Checked(result=True, original='안녕 하세요. 저는 한국인 입니다. 이
 
 ```python
 >>> from hanspell import spell_checker
->>> spell_checker.check([u'안녕 하세요.', u'저는 한국인 입니다.'])
+>>> await spell_checker.check([u'안녕 하세요.', u'저는 한국인 입니다.'])
 [Checked(result=True, original='안녕 하세요.', checked='안녕하세요.', errors=1, words=OrderedDict([('안녕하세요.', 2)]), time=0.03297615051269531),
  Checked(result=True, original='저는 한국인 입니다.', checked='저는 한국인입니다.', errors=1, words=OrderedDict([('저는', 0), ('한국인입니다.', 2)]), time=0.029018878936767578)]
 ```
@@ -120,18 +119,17 @@ from hanspell.constants import CheckResult
 
 ## 변경내역
 
-- **버전 1.1**: list 타입으로 주고받는 기능 지원, 처리속도 향상
 - **버전 1.0**: 첫 버전 릴리즈
 
 
 ## 라이선스(License)
 
-py-hanspell은 MIT License로 제공됩니다. 라이선스 전문은 아래와 같습니다:
+py-aiohanspell은 MIT License로 제공됩니다. 라이선스 전문은 아래와 같습니다:
 
 ```
-The MIT License (MIT)
+MIT License
 
-Copyright (c) 2015 SuHun Han
+Copyright (c) 2021 SpaceDEVofficial
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -150,4 +148,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 ```

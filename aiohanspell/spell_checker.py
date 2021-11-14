@@ -3,7 +3,7 @@
 Python용 한글 맞춤법 검사 모듈
 """
 
-import requests
+import aiohttp
 import json
 import time
 import sys
@@ -15,21 +15,17 @@ from .response import Checked
 from .constants import base_url
 from .constants import CheckResult
 
-_agent = requests.Session()
 PY3 = sys.version_info[0] == 3
-
 
 def _remove_tags(text):
     text = u'<content>{}</content>'.format(text).replace('<br>','')
     if not PY3:
         text = text.encode('utf-8')
 
-    result = ''.join(ET.fromstring(text).itertext())
-
-    return result
+    return ''.join(ET.fromstring(text).itertext())
 
 
-def check(text):
+async def check(text):
     """
     매개변수로 입력받은 한글 문장의 맞춤법을 체크합니다.
     """
@@ -55,12 +51,17 @@ def check(text):
     }
 
     start_time = time.time()
-    r = _agent.get(base_url, params=payload, headers=headers)
+    #r = _agent.get(base_url, params=payload, headers=headers)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(base_url,params=payload,headers=headers) as resp:
+            r = await resp.text()
+            r = r[42:-2]
+            data = json.loads(r)
     passed_time = time.time() - start_time
 
-    r = r.text[42:-2]
+    #r = r.text[42:-2]
 
-    data = json.loads(r)
+    #data = json.loads(r)
     html = data['message']['result']['html']
     result = {
         'result': True,
@@ -88,7 +89,7 @@ def check(text):
             tmp = word[:pos]
         elif tmp != '':
             word = u'{}{}'.format(tmp, word)
-        
+
         if word[-5:] == '<end>':
             word = word.replace('<end>', '')
             tmp = ''
