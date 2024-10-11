@@ -12,7 +12,7 @@ class Checked(_checked):
             cls, result, original, checked, errors, words, time)
 
     def as_dict(self):
-        return {
+        d = {
             'result': self.result,
             'original': self.original,
             'checked': self.checked,
@@ -20,6 +20,7 @@ class Checked(_checked):
             'words': self.words,
             'time': self.time,
         }
+        return d
 
     def only_checked(self):
         return self.checked
